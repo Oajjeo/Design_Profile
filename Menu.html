@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navbar with Banner</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    /* Navbar Styling */
+    nav {
+      background-color: #1a1a2e;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 8px 14px;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background-color: #16213e;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a2e;
+        flex-direction: column;
+        display: none;
+        text-align: center;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 15px 0;
+      }
+    }
+
+    /* Banner Section */
+    .banner {
+      height: 90vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                  url('https://source.unsplash.com/1600x900/?technology,webdesign') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 40px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease-out;
+    }
+
+    .banner.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .banner h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .banner p {
+      font-size: 20px;
+      max-width: 700px;
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">MyPortfolio</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Photo</a></li>
+      <li><a href="#">Table</a></li>
+      <li><a href="#">Form</a></li>
+      <li><a href="#">Services</a></li>
+    </ul>
+  </nav>
+
+  <!-- Banner -->
+  <section class="banner" id="banner">
+    <div>
+      <h1>Welcome to My Website</h1>
+      <p>Explore my portfolio, see my latest projects, and get in touch for collaborations or freelance work.</p>
+<img src="images/Bannner.jpg" >
+    </div>
+  </section>
+
+  <script>
+    // Toggle Mobile Menu
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+
+    // Scroll Animation for Banner
+    window.addEventListener('scroll', () => {
+      const banner = document.getElementById('banner');
+      const bannerTop = banner.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (bannerTop < windowHeight - 100) {
+        banner.classList.add('visible');
+      }
+    });
+
+    // Trigger animation if banner is already in view on load
+    window.addEventListener('load', () => {
+      const banner = document.getElementById('banner');
+      if (banner.getBoundingClientRect().top < window.innerHeight - 100) {
+        banner.classList.add('visible');
+      }
+    });
+  </script>
+
+</body>
+</html>
